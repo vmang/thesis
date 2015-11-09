@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Database Connector</title>
+    </h:head>
+    <h:body>
+        <p:tabMenu activeIndex="#{param.i}">
+            <p:menuitem value="Upload" outcome="/upload" icon="ui-icon-document">
+                <f:param name="i" value="0" />
+            </p:menuitem>
+            <p:menuitem value="Database Connection" outcome="/dbcon" icon="ui-icon-disk">
+                <f:param name="i" value="1" />
+            </p:menuitem>
+            <p:menuitem value="PDF Viewer" outcome="/viewpdf" icon="ui-icon-document">
+                <f:param name="i" value="2" />
+            </p:menuitem>
+            <p:menuitem value="Support" outcome="/upload" icon="ui-icon-wrench">
+                <f:param name="i" value="3" />
+            </p:menuitem>
+            <p:menuitem value="Social" outcome="/upload" icon="ui-icon-person">
+                <f:param name="i" value="4" />
+            </p:menuitem>
+        </p:tabMenu>
+        <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+        <p:panel id="basic" header="Database Connector " footer="Impressum und so" style="margin-bottom:20px">
+            <h:form>
+                <h:panelGrid columns="2" cellpadding="5">
+                    <p:outputLabel for="driver" value="Treiber:" />
+                    <p:selectOneMenu id="driver" value="#{dbc.driver}" style="width:125px">
+                        <f:selectItem itemLabel="Select One" itemValue="" />
+                        <f:selectItem itemLabel="MySQL" itemValue="com.mysql.jdbc.Driver" />
+                        <f:selectItem itemLabel="MS SQL" itemValue="MSSQL" />
+                        <f:selectItem itemLabel="DB2" itemValue="DB2" />
+                    </p:selectOneMenu>
+                    <h:outputText value="Adresse: " />
+                    <p:inputText value ="#{dbc.adresse}"/>
+                    <h:outputText value="Port: " />
+                    <p:inputText value ="#{dbc.port}"/>
+                    <h:outputText value="Database Name: " />
+                    <p:inputText value ="#{dbc.dbName}"/>
+                    <h:outputText value="Username: " />
+                    <p:inputText value ="#{dbc.username}"/>
+                    <h:outputText value="Password: " />
+                    <p:password id="password" value="#{dbc.password}" feedback="true" />
+                    <p:commandButton actionListener="#{dbc.checkCon}" value="Test Connection" />
+                    <p:commandButton action="#{dbc.loadTables}" value="Lade Tabellen" />
+                </h:panelGrid>
+                <!--<p:growl id="mes" showDetail="true" />-->
+            </h:form>
+        </p:panel>
+    </h:body>
+</html>

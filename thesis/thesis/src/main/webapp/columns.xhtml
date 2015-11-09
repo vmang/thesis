@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Upload Bereich</title>
+    </h:head>
+    <h:body>
+        <p:tabMenu activeIndex="#{param.i}">
+            <p:menuitem value="Upload" outcome="/upload" icon="ui-icon-document">
+                <f:param name="i" value="0" />
+            </p:menuitem>
+            <p:menuitem value="Database Connection" outcome="/dbcon" icon="ui-icon-disk">
+                <f:param name="i" value="1" />
+            </p:menuitem>
+            <p:menuitem value="PDF Viewer" outcome="/viewpdf" icon="ui-icon-document">
+                <f:param name="i" value="2" />
+            </p:menuitem>
+            <p:menuitem value="Support" outcome="/upload" icon="ui-icon-wrench">
+                <f:param name="i" value="3" />
+            </p:menuitem>
+            <p:menuitem value="Social" outcome="/upload" icon="ui-icon-person">
+                <f:param name="i" value="4" />
+            </p:menuitem>
+        </p:tabMenu>
+
+        <p:panel id="basic" header="Spaltenauswahl" footer="Impressum und so" style="margin-bottom:20px">
+            <h:form>
+                <p:growl id="msg" showDetail="true" escape="false" />
+
+                <h3 style="margin-top: 0">Bitte wählen Sie die Spalten aus, aus welchen die Daten geholt werden sollen.</h3>
+                <p:pickList style="width: 400px" id="pickList" value="#{dbc.columns}" var="column" itemLabel="#{column}" itemValue="#{column}" showSourceFilter="true" showTargetFilter="true" showCheckbox="true">
+                    <f:facet name="sourceCaption">Verfügbare Spalten</f:facet>
+                    <f:facet name="targetCaption">Gewählte Spalten</f:facet>
+                </p:pickList>
+                <p:commandButton action="#{dbc.fillBetragsdaten()}" value="Befülle Betragsdaten" />
+                <p:commandButton action="#{dbc.fillStammdaten()}" value="Befülle Stammdaten" />
+            </h:form>
+        </p:panel>
+    </h:body>
+</html>
+
